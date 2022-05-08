@@ -1,0 +1,50 @@
+################ APPLICATION ####################
+server:
+  port: 8080
+  max-http-header-size: 48000
+
+application:
+  name: '@name@'
+  service-name: '@project.artifactId@'
+  version: '@project.version@'
+
+
+################ DATABASE ####################
+spring.datasource.url: jdbc:postgresql://localhost:5432/bazarweb
+spring.datasource.timezone: UTC
+spring.datasource.username: postgres
+spring.datasource.password: docker
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.flyway.locations: filesystem:src/main/resources/db/migration, filesystem:src/main/resources/db/test_data
+spring.jpa.show-sql: "true"
+spring.jpa.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+################### SWAGGER #####################
+springfox:
+  documentation:
+    swagger:
+      useModelV3: false
+
+springdoc:
+  swagger-ui:
+    enabled: true
+#  paths-to-match: /v1/**
+#  packages-to-scan: com.bazarweb.api.entrypoint.resource
+
+swagger:
+  basePackage: com.bazarweb.api.entrypoint.resource
+  version: ${application.version}
+  title: Bazar Web 2.0 API
+  description: API for Bazar Web 2.0
+  license: Apache 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0
+  termsOfServiceUrl: https://bazarweb.com/terms-of-service
+  contactName: Adriano Queiroz
+  contactUrl: https://github.com/adrianoqueiroz
+  contactEmail: adriano.nq@gmail.com
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
